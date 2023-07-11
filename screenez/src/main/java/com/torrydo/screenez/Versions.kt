@@ -10,6 +10,7 @@ internal object AndroidVersions {
     const val `10` = Build.VERSION_CODES.Q              // 29
     const val `9` = Build.VERSION_CODES.P               // 28
     const val `8` = Build.VERSION_CODES.O               // 26
+    const val `7_1` = Build.VERSION_CODES.N_MR1         // 25
     const val `7` = Build.VERSION_CODES.N               // 24
     const val `6` = Build.VERSION_CODES.M               // 23
     const val `5` = Build.VERSION_CODES.LOLLIPOP        // 21
