@@ -1,9 +1,14 @@
 package com.torrydo.screenez_test
 
+import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.util.DisplayMetrics
+import android.view.Display
+import android.view.WindowManager
+import android.view.WindowMetrics
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -27,22 +32,37 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         ScreenEz.with(applicationContext)
 
-        val screenWidth = ScreenEz.fullWidth
-        val screenHeight = ScreenEz.fullHeight
+//        val screenWidth = ScreenEz.fullWidth
+//        val screenHeight = ScreenEz.fullHeight
+//
+//        val statusBarHeight = ScreenEz.statusBarHeight
+//        val navBarHeight = ScreenEz.navBarHeight
+//
+//        val safeWidth = ScreenEz.safeWidth
+//        val safeHeight = ScreenEz.safeHeight
 
-        val statusBarHeight = ScreenEz.statusBarHeight
-        val navBarHeight = ScreenEz.navBarHeight
+        ScreenEz.fullWidth
+        ScreenEz.fullHeight
+        ScreenEz.safeScreenPadding
+        ScreenEz.safeArea
+        ScreenEz.cutoutPadding
+        ScreenEz.statusBarPadding
+        ScreenEz.navBarPadding
+        ScreenEz.statusBarHeight
+        ScreenEz.navBarHeight
+        ScreenEz.safeWidth
+        ScreenEz.safeHeight
+        // and more ...
 
-        val safeWidth = ScreenEz.safeWidth
-        val safeHeight = ScreenEz.safeHeight
+        reality()
 
-        Log.d("<>", "-----------------------------: ");
-        Log.d("<>", "screen width: $screenWidth");
-        Log.d("<>", "screen height: $screenHeight");
-        Log.d("<>", "statusbar height: $statusBarHeight");
-        Log.d("<>", "navbar height: $navBarHeight");
-        Log.d("<>", "safeWidth: $safeWidth");
-        Log.d("<>", "safeHeight: $safeHeight");
+//        Log.d("<>", "-----------------------------: ");
+//        Log.d("<>", "screen width: $screenWidth");
+//        Log.d("<>", "screen height: $screenHeight");
+//        Log.d("<>", "statusbar height: $statusBarHeight");
+//        Log.d("<>", "navbar height: $navBarHeight");
+//        Log.d("<>", "safeWidth: $safeWidth");
+//        Log.d("<>", "safeHeight: $safeHeight");
 
         setContent {
             Screenez_testTheme {
@@ -62,6 +82,30 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    private fun reality() {
+
+
+        val wm = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+
+        val display: Display = wm.defaultDisplay
+        val width: Int = display.width
+        val height: Int = display.height
+        val displayMetrics = DisplayMetrics().also { display.getRealMetrics(it) }
+        val cutout = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            display.cutout
+        } else {
+            TODO("VERSION.SDK_INT < Q")
+        }
+        val windowMetrics = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            wm.maximumWindowMetrics
+        } else {
+            TODO("VERSION.SDK_INT < R")
+        }
+        // and more ...
+
+
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
