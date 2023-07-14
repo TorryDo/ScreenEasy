@@ -1,5 +1,5 @@
 # ScreenEasy 💎 ScreenEz
-🔥 An Android library that provides quick access to screen attributes like: `screenSize`, `cutout`, `status/navbar`, `safeArea`, ... without worry about deprecated stuffs. 
+🔥 An Android library that provides quick access to screen attributes like: `screenSize`, `cutout`, `status/navbar`, `safeArea`, ... without worrying about headache, deprecated stuffs. 
 
 &nbsp;
 
@@ -102,6 +102,38 @@ Declare the dependencies in the module-level `build.gradle` file 🍀 <img src="
 
 <br>
 
+<details><summary><b>Java</b></summary>
+
+| API | Return | Description |
+| :- | :- | :- |
+| `with(context)` | None | Call this function one time before any other function to setup properly. Calling multiple times is okay, but unnecessary |
+| `refresh()` | None | Refresh attributes, call when configuration change, rotation, ... |
+| `getNavBarPadding()` | ScreenPadding | Represent screen padding of system bar for navigation |
+| `getStatusBarPadding()` | ScreenPadding | Represent screen padding of status bar. |
+| `getCutoutPadding()` | ScreenPadding | Represent screen padding of cutout for the notch, or smth similar |
+| `getFullWidth()` | Int | Width of the screen in pixel |
+| `getFullHeight()` | Int | Height of the screen in pixel |
+| `getFullSize()` | Size | Size of the screen in pixel |
+| `isButtonsNavigation()` | Boolean | True if buttons navigation is being used |
+| `isGestureNavigation()` | Boolean | True if gesture navigation is being used |
+| `getSafeArea()` | ScreenArea | The area of the screen that is not obscured by the navigation bar, status bar, or other system UI elements. |
+| `getSafeScreenPadding()` | ScreenPadding | Returns the safe screen padding |
+| `getSafePaddingLeft()` | Int | Padding for LEFT edge to avoid overlap with system UI |
+| `getSafePaddingRight()` | Int | Padding for RIGHT edge to avoid overlap with system UI |
+| `getSafePaddingTop()` | Int | Padding for TOP edge to avoid overlap with system UI |
+| `getSafePaddingBottom()` | Int | Padding for BOTTOM edge to avoid overlap with system UI |
+| `getSafeWidth()` | Int | The width of the screen after subtracting the system bar on the left and right sides |
+| `getSafeHeight()` | Int | The height of the screen after subtracting the system bar on the top and bottom sides |
+| `getSafeSize()` | Size | The Size(width, height) of the screen after subtracting the system bar on all sides |
+| `getStatusBarHeight()` | Int |  status bar height (pixel unit) |
+| `getNavBarHeight()` | Int | navigation bar height (both gesture and buttons in pixel unit) |
+| `isPortrait()` | Boolean | True if screen is in portrait mode |
+| `getScreenRotation()` | ScreenRotation | the rotation of the screen. (portrait, landscape, reversed...) |
+
+</details>
+
+
+<details open><summary><b>Kotlin</b></summary>
 
 | API | Return | Description |
 | :- | :- | :- |
@@ -115,12 +147,12 @@ Declare the dependencies in the module-level `build.gradle` file 🍀 <img src="
 | `fullSize` | Size | Size of the screen in pixel |
 | `isButtonsNavigation` | Boolean | True if buttons navigation is being used |
 | `isGestureNavigation` | Boolean | True if gesture navigation is being used |
-| `safeArea` | ScreenArea | The safeArea is the area of the screen that is not obscured by the navigation bar, status bar, or other system UI elements. |
+| `safeArea` | ScreenArea | The area of the screen that is not obscured by the navigation bar, status bar, or other system UI elements. |
 | `safeScreenPadding` | ScreenPadding | Returns the safe screen padding |
-| `safePaddingLeft` | Int | The amount of padding that should be applied to the left edge of the screen to avoid overlapping with the navigation bar, status bar, or other system UI elements |
-| `safePaddingRight` | Int | The amount of padding that should be applied to the right edge of the screen to avoid overlapping with the navigation bar, status bar, or other system UI elements |
-| `safePaddingTop` | Int | The amount of padding that should be applied to the top edge of the screen to avoid overlapping with the navigation bar, status bar, or other system UI elements |
-| `safePaddingBottom` | Int | The amount of padding that should be applied to the bottom edge of the screen to avoid overlapping with the navigation bar, status bar, or other system UI elements |
+| `safePaddingLeft` | Int | Padding for LEFT edge to avoid overlap with system UI |
+| `safePaddingRight` | Int | Padding for RIGHT edge to avoid overlap with system UI |
+| `safePaddingTop` | Int | Padding for TOP edge to avoid overlap with system UI |
+| `safePaddingBottom` | Int | Padding for BOTTOM edge to avoid overlap with system UI |
 | `safeWidth` | Int | The width of the screen after subtracting the system bar on the left and right sides |
 | `safeHeight` | Int | The height of the screen after subtracting the system bar on the top and bottom sides |
 | `safeSize` | Size | The Size(width, height) of the screen after subtracting the system bar on all sides |
@@ -128,6 +160,10 @@ Declare the dependencies in the module-level `build.gradle` file 🍀 <img src="
 | `navBarHeight` | Int | navigation bar height (both gesture and buttons in pixel unit) |
 | `isPortrait()` | Boolean | True if screen is in portrait mode |
 | `screenRotation()` | ScreenRotation | the rotation of the screen. (portrait, landscape, reversed...) |
+
+</details>
+
+
 
 
 
