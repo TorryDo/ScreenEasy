@@ -94,9 +94,23 @@ Declare the dependencies in the module-level `build.gradle` file 🍀 <img src="
 
 
 ## II. Usage <a name="usage"/>
-1, Firstly, call `ScreenEz.with(context)` anywhere in your project
+1, Firstly, init `ScreenEz.with(context)` anywhere in your project
 
-> optional: call `ScreenEz.refresh()` when configuration change (orientation/rotation change...)
+> Optional: call `ScreenEz.refresh()` when configuration change (orientation/rotation change...)
+
+> If you are developing a library that use `ScreenEasy` internally, please create an instance of `ScreenEasy()` instead. You can find the reason [here](https://github.com/TorryDo/ScreenEasy/issues/1)
+
+<details><summary>Sample</summary>
+
+```java
+// consider using this approach instead if you are developing a library/submodule
+val screenEasy = ScreenEasy()
+screenEasy.with(context)
+```
+
+</details>
+
+
 
 2, That's it, no more step needed, enjoy! 💖
 
@@ -145,21 +159,21 @@ Declare the dependencies in the module-level `build.gradle` file 🍀 <img src="
 | `fullWidth` | Int | Width of the screen in pixel |
 | `fullHeight` | Int | Height of the screen in pixel |
 | `fullSize` | Size | Size of the screen in pixel |
-| `isButtonsNavigation` | Boolean | True if buttons navigation is being used |
-| `isGestureNavigation` | Boolean | True if gesture navigation is being used |
 | `safeArea` | ScreenArea | The area of the screen that is not obscured by the navigation bar, status bar, or other system UI elements. |
 | `safeScreenPadding` | ScreenPadding | Returns the safe screen padding |
-| `safePaddingLeft` | Int | Padding for LEFT edge to avoid overlap with system UI |
-| `safePaddingRight` | Int | Padding for RIGHT edge to avoid overlap with system UI |
-| `safePaddingTop` | Int | Padding for TOP edge to avoid overlap with system UI |
-| `safePaddingBottom` | Int | Padding for BOTTOM edge to avoid overlap with system UI |
+| `safePaddingLeft` | Int | Padding for `LEFT` edge to avoid overlap with system UI |
+| `safePaddingRight` | Int | Padding for `RIGHT` edge to avoid overlap with system UI |
+| `safePaddingTop` | Int | Padding for `TOP` edge to avoid overlap with system UI |
+| `safePaddingBottom` | Int | Padding for `BOTTOM` edge to avoid overlap with system UI |
 | `safeWidth` | Int | The width of the screen after subtracting the system bar on the left and right sides |
 | `safeHeight` | Int | The height of the screen after subtracting the system bar on the top and bottom sides |
-| `safeSize` | Size | The Size(width, height) of the screen after subtracting the system bar on all sides |
+| `safeSize` | Size | The `Size` of the screen after subtracting the system bar on all sides |
 | `statusBarHeight` | Int |  status bar height (pixel unit) |
 | `navBarHeight` | Int | navigation bar height (both gesture and buttons in pixel unit) |
-| `isPortrait()` | Boolean | True if screen is in portrait mode |
-| `screenRotation()` | ScreenRotation | the rotation of the screen. (portrait, landscape, reversed...) |
+| `screenRotation` | ScreenRotation | the rotation of the screen. (portrait, landscape, reversed...) |
+| `isPortrait()` | Boolean | `true` if screen is in portrait mode, `false` otherwise |
+| `isButtonsNavigation()` | Boolean | `true` if buttons navigation is being used |
+| `isGestureNavigation()` | Boolean | `true` if gesture navigation is being used |
 
 </details>
 
@@ -175,7 +189,7 @@ Declare the dependencies in the module-level `build.gradle` file 🍀 <img src="
 
 Contributions are welcome! 🙌
 
-- If you come across a bug or have an idea for a new feature, please let us know by creating an [Issue](https://github.com/TorryDo/ScreenEasy/issues) 🐛💡
+- If you come across a bug or have an idea for a new feature, please let us know by creating an [Issue](https://github.com/TorryDo/ScreenEasy/issues) 🐞🐛💡
 - If you've already fixed a bug or implemented a feature, feel free to submit a [Pull request](https://github.com/TorryDo/ScreenEasy/pulls) 🚀
 - Having questions, ideas, or feedback? Don't worry, I gotchu. Simply open a [Discussion](https://github.com/TorryDo/ScreenEasy/discussions) 🔊
 - Find this project useful? Don't forget to show some love by giving a star ⭐
