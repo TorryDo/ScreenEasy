@@ -230,7 +230,7 @@ internal open class ApiLevel28(private val context: Context) : ApiLevel25(contex
 
 }
 
-// api level 28 (android 9)
+// api level 25 (android 7.1)
 @RequiresApi(AndroidVersions.`7_1`)
 internal open class ApiLevel25(private val context: Context) : ApiLevel21(context) {
 

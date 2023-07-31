@@ -5,80 +5,80 @@ import android.content.Context
 
 object ScreenEz {
 
-    private val screenEz = ScreenEasy()
+    private val screenEasy = ScreenEasy()
 
     @JvmStatic
     fun with(context: Context) {
-        screenEz.with(context)
+        screenEasy.with(context)
     }
 
     @JvmStatic
-    fun refresh() = screenEz.refresh()
+    fun refresh() = screenEasy.refresh()
 
     @JvmStatic
-    val navBarPadding: ScreenPadding get() = screenEz.navBarPadding
+    val navBarPadding: ScreenPadding get() = screenEasy.navBarPadding
 
     @JvmStatic
-    val statusBarPadding: ScreenPadding get() = screenEz.statusBarPadding
+    val statusBarPadding: ScreenPadding get() = screenEasy.statusBarPadding
 
     @JvmStatic
-    val cutoutPadding: ScreenPadding get() = screenEz.cutoutPadding
+    val cutoutPadding: ScreenPadding get() = screenEasy.cutoutPadding
 
     @JvmStatic
-    val fullWidth get() = screenEz.fullWidth
+    val fullWidth get() = screenEasy.fullWidth
 
     @JvmStatic
-    val fullHeight get() = screenEz.fullHeight
+    val fullHeight get() = screenEasy.fullHeight
 
     @JvmStatic
-    val fullSize get() = screenEz.fullSize
+    val fullSize get() = screenEasy.fullSize
 
     @JvmStatic
-    val safeArea get() = screenEz.safeArea
+    val safeArea get() = screenEasy.safeArea
 
     @JvmStatic
-    val safeScreenPadding get() = screenEz.safeScreenPadding
+    val safeScreenPadding get() = screenEasy.safeScreenPadding
 
     @JvmStatic
-    val safePaddingLeft get() = screenEz.safePaddingLeft
+    val safePaddingLeft get() = screenEasy.safePaddingLeft
 
     @JvmStatic
-    val safePaddingRight get() = screenEz.safePaddingRight
+    val safePaddingRight get() = screenEasy.safePaddingRight
 
     @JvmStatic
-    val safePaddingTop get() = screenEz.safePaddingTop
+    val safePaddingTop get() = screenEasy.safePaddingTop
 
     @JvmStatic
-    val safePaddingBottom get() = screenEz.safePaddingBottom
+    val safePaddingBottom get() = screenEasy.safePaddingBottom
 
     @JvmStatic
-    val safeWidth get() = screenEz.safeWidth
+    val safeWidth get() = screenEasy.safeWidth
 
     @JvmStatic
-    val safeHeight get() = screenEz.safeHeight
+    val safeHeight get() = screenEasy.safeHeight
 
     @JvmStatic
-    val safeSize get() = screenEz.safeSize
+    val safeSize get() = screenEasy.safeSize
 
     @JvmStatic
-    val statusBarHeight get() = screenEz.statusBarHeight
+    val statusBarHeight get() = screenEasy.statusBarHeight
 
     @JvmStatic
-    val navBarHeight get() = screenEz.navBarHeight
+    val navBarHeight get() = screenEasy.navBarHeight
 
     @JvmStatic
-    val screenRotation get() = screenEz.screenRotation
+    val screenRotation get() = screenEasy.screenRotation
 
     // fun
 
     @JvmStatic
-    fun isPortrait() = screenEz.isPortrait()
+    fun isPortrait() = screenEasy.isPortrait()
 
     @JvmStatic
-    fun isButtonsNavigation() = screenEz.isButtonsNavigation()
+    fun isButtonsNavigation() = screenEasy.isButtonsNavigation()
 
     @JvmStatic
-    fun isGestureNavigation() = screenEz.isGestureNavigation()
+    fun isGestureNavigation() = screenEasy.isGestureNavigation()
 
 
 }

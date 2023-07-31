@@ -10,14 +10,20 @@ import java.lang.ref.WeakReference
 class ScreenEasy {
 
     private var _screenInfo: ScreenInfoApi? = null
-    private val screenInfo get() = _screenInfo!!
+    private val screenInfo: ScreenInfoApi
+        get() {
+            if (_screenInfo == null) {
+                throw IllegalStateException("You haven't call `with(context)`")
+            }
+            return _screenInfo!!
+        }
 
 
     private var _weakContext: WeakReference<Context>? = null
     private val context: Context
         get() {
             if (_weakContext == null) {
-                throw IllegalStateException("You haven't call `ScreenEz.with(context)`")
+                throw IllegalStateException("You haven't call `with(context)`")
             }
             return _weakContext!!.get()!!
         }
@@ -32,7 +38,7 @@ class ScreenEasy {
      * */
     fun with(context: Context) {
         _weakContext = WeakReference(context.applicationContext)
-        ScreenEz.refresh()
+        refresh()
     }
 
     /**
@@ -83,12 +89,12 @@ class ScreenEasy {
     /**
      * return full width of the screen in pixel.
      * */
-    val fullWidth get() = ScreenEz.fullSize.width
+    val fullWidth get() = fullSize.width
 
     /**
      * return full height of the screen in pixel.
      * */
-    val fullHeight get() = ScreenEz.fullSize.height
+    val fullHeight get() = fullSize.height
 
     /**
      * return full size of the screen in pixel.
@@ -113,13 +119,13 @@ class ScreenEasy {
      * */
     val safeArea: ScreenArea
         get() {
-            val paddings = ScreenEz.safeScreenPadding
+            val paddings = safeScreenPadding
 
             val topLeft = Point(paddings.left, paddings.top)
-            val topRight = Point(ScreenEz.fullWidth - paddings.right, paddings.top)
+            val topRight = Point(fullWidth - paddings.right, paddings.top)
             val bottomRight =
-                Point(ScreenEz.fullWidth - paddings.right, ScreenEz.fullHeight - paddings.bottom)
-            val bottomLeft = Point(paddings.left, ScreenEz.fullHeight - paddings.bottom)
+                Point(fullWidth - paddings.right, fullHeight - paddings.bottom)
+            val bottomLeft = Point(paddings.left, fullHeight - paddings.bottom)
 
             return ScreenArea(
                 topLeft = topLeft,
@@ -141,10 +147,10 @@ class ScreenEasy {
      */
     val safeScreenPadding: ScreenPadding
         get() {
-            val topPadding = ScreenEz.safePaddingTop
-            val bottomPadding = ScreenEz.safePaddingBottom
-            val leftPadding = ScreenEz.safePaddingLeft
-            val rightPadding = ScreenEz.safePaddingRight
+            val topPadding = safePaddingTop
+            val bottomPadding = safePaddingBottom
+            val leftPadding = safePaddingLeft
+            val rightPadding = safePaddingRight
 
             return ScreenPadding(
                 left = leftPadding,
@@ -226,8 +232,8 @@ class ScreenEasy {
      */
     val safeWidth: Int
         get() {
-            val total = ScreenEz.safePaddingLeft + ScreenEz.safePaddingRight
-            return ScreenEz.fullWidth - total
+            val total = safePaddingLeft + safePaddingRight
+            return fullWidth - total
         }
 
     /**
@@ -237,12 +243,12 @@ class ScreenEasy {
      */
     val safeHeight: Int
         get() {
-            val bottomGestureNavHeight = ScreenEz.navBarPadding.height()
-            val topStatusBarHeight = ScreenEz.statusBarPadding.height()
+            val bottomGestureNavHeight = navBarPadding.height()
+            val topStatusBarHeight = statusBarPadding.height()
 
             val total = bottomGestureNavHeight + topStatusBarHeight
 
-            return ScreenEz.fullHeight - total
+            return fullHeight - total
         }
 
     /**
@@ -250,12 +256,12 @@ class ScreenEasy {
      *
      * Returns: Integer (pixel unit), the safe height of the screen.
      */
-    val safeSize get() = Size(ScreenEz.safeWidth, ScreenEz.safeHeight)
+    val safeSize get() = Size(safeWidth, safeHeight)
 
     /**
      * @return status bar height (pixel unit)
      * */
-    val statusBarHeight: Int get() = ScreenEz.statusBarPadding.top
+    val statusBarHeight: Int get() = statusBarPadding.top
 
     /**
      * @return navigation bar height (both gesture and buttons in pixel unit)

@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.Display
 import android.view.WindowManager
-import android.view.WindowMetrics
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -24,13 +23,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.torrydo.screenez.ScreenEasy
 import com.torrydo.screenez.ScreenEz
 import com.torrydo.screenez_test.ui.theme.Screenez_testTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ScreenEz.with(applicationContext)
+//        ScreenEz.with(applicationContext)
+        val screenEasy = ScreenEasy()
+        screenEasy.with(this)
 
 //        val screenWidth = ScreenEz.fullWidth
 //        val screenHeight = ScreenEz.fullHeight
@@ -41,17 +43,17 @@ class MainActivity : ComponentActivity() {
 //        val safeWidth = ScreenEz.safeWidth
 //        val safeHeight = ScreenEz.safeHeight
 
-        ScreenEz.fullWidth
-        ScreenEz.fullHeight
-        ScreenEz.safeScreenPadding
-        ScreenEz.safeArea
-        ScreenEz.cutoutPadding
-        ScreenEz.statusBarPadding
-        ScreenEz.navBarPadding
-        ScreenEz.statusBarHeight
-        ScreenEz.navBarHeight
-        ScreenEz.safeWidth
-        ScreenEz.safeHeight
+        screenEasy.fullWidth
+        screenEasy.fullHeight
+        screenEasy.safeScreenPadding
+        screenEasy.safeArea
+        screenEasy.cutoutPadding
+        screenEasy.statusBarPadding
+        screenEasy.navBarPadding
+        screenEasy.statusBarHeight
+        screenEasy.navBarHeight
+        screenEasy.safeWidth
+        screenEasy.safeHeight
         // and more ...
 
         reality()
