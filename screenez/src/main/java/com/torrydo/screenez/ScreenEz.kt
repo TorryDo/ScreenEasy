@@ -4,12 +4,87 @@ import android.content.Context
 import android.content.res.Configuration
 import android.graphics.Point
 import android.os.Build
-import android.util.Log
 import android.util.Size
 import java.lang.ref.WeakReference
 
 
-object ScreenEz {
+class ScreenEz {
+
+    companion object {
+
+        private val screenEz = ScreenEz()
+
+        @JvmStatic
+        fun with(context: Context){
+            screenEz._with(context)
+        }
+        @JvmStatic
+        fun refresh() = screenEz._refresh()
+
+        @JvmStatic
+        val navBarPadding: ScreenPadding get() = screenEz._navBarPadding
+
+        @JvmStatic
+        val statusBarPadding: ScreenPadding get() = screenEz._statusBarPadding
+
+        @JvmStatic
+        val cutoutPadding: ScreenPadding get() = screenEz._cutoutPadding
+
+        @JvmStatic
+        val fullWidth get() = screenEz._fullWidth
+
+        @JvmStatic
+        val fullHeight get() = screenEz._fullHeight
+
+        @JvmStatic
+        val fullSize get() = screenEz._fullSize
+
+        @JvmStatic
+        fun isButtonsNavigation() = screenEz._isButtonsNavigation()
+
+        @JvmStatic
+        fun isGestureNavigation() = screenEz._isGestureNavigation()
+
+        @JvmStatic
+        val safeArea get() = screenEz._safeArea
+
+        @JvmStatic
+        val safeScreenPadding get() = screenEz._safeScreenPadding
+
+        @JvmStatic
+        val safePaddingLeft get() = screenEz._safePaddingLeft
+
+        @JvmStatic
+        val safePaddingRight get() = screenEz._safePaddingRight
+
+        @JvmStatic
+        val safePaddingTop get() = screenEz._safePaddingTop
+
+        @JvmStatic
+        val safePaddingBottom get() = screenEz._safePaddingBottom
+
+        @JvmStatic
+        val safeWidth get() = screenEz._safeWidth
+
+        @JvmStatic
+        val safeHeight get() = screenEz._safeHeight
+
+        @JvmStatic
+        val safeSize get() = screenEz._safeSize
+
+        @JvmStatic
+        val statusBarHeight get() = screenEz._statusBarHeight
+
+        @JvmStatic
+        val navBarHeight get() = screenEz._navBarHeight
+
+        @JvmStatic
+        fun isPortrait() = screenEz._isPortrait()
+
+        @JvmStatic
+        fun screenRotation() = screenEz._screenRotation()
+
+    }
 
     private var _screenInfo: ScreenInfoApi? = null
     private val screenInfo get() = _screenInfo!!
@@ -32,8 +107,7 @@ object ScreenEz {
      *
      * just need to call one time, calling multiple times is okay, but unnecessary
      * */
-    @JvmStatic
-    fun with(context: Context) {
+    private fun _with(context: Context) {
         _weakContext = WeakReference(context.applicationContext)
         refresh()
     }
@@ -41,8 +115,7 @@ object ScreenEz {
     /**
      * refresh attributes, call when configuration change, rotation, ...
      * */
-    @JvmStatic
-    fun refresh() {
+    private fun _refresh() {
         _screenInfo = when {
             Build.VERSION.SDK_INT >= AndroidVersions.`11` -> ApiLevel30(context)    // android 11+
             Build.VERSION.SDK_INT >= AndroidVersions.`10` -> ApiLevel29(context)    // android 10
@@ -66,16 +139,14 @@ object ScreenEz {
      *
      * i.e: if navigation bar is on the bottom (left=0, top=0, right=0, bottom=100)
      * */
-    @JvmStatic
-    val navBarPadding: ScreenPadding get() = screenInfo.navBarPadding()
+    private val _navBarPadding: ScreenPadding get() = screenInfo.navBarPadding()
 
     /**
      * represent screen padding of status bar
      *
      * i.e: if status bar is on the top (left=0, top=100, right=0, bottom=0)
      * */
-    @JvmStatic
-    val statusBarPadding: ScreenPadding get() = screenInfo.statusPadding()
+    private val _statusBarPadding: ScreenPadding get() = screenInfo.statusPadding()
 
     /**
      * Represent screen padding of cutout for the notch, or similar.
@@ -84,45 +155,40 @@ object ScreenEz {
      *
      * i.e: if the cutout of the notch is on the top (left=0, top=100, right=0, bottom=0)
      * */
-    @JvmStatic
-    val cutoutPadding: ScreenPadding get() = screenInfo.cutoutPadding()
+    private val _cutoutPadding: ScreenPadding get() = screenInfo.cutoutPadding()
 
     /**
      * return full width of the screen in pixel.
      * */
-    @JvmStatic
-    val fullWidth get() = fullSize.width
+    private val _fullWidth get() = fullSize.width
+
     /**
      * return full height of the screen in pixel.
      * */
-    @JvmStatic
-    val fullHeight get() = fullSize.height
+    private val _fullHeight get() = fullSize.height
+
     /**
      * return full size of the screen in pixel.
      * */
-    @JvmStatic
-    val fullSize get() = screenInfo.screenSize()
+    private val _fullSize get() = screenInfo.screenSize()
 
 
     /**
      * return true if buttons navigation is being used (ie: 3 buttons: back, home, recent apps)
      * */
-    @JvmStatic
-    fun isButtonsNavigation() = screenInfo.isButtonsNavigation()
+    private fun _isButtonsNavigation() = screenInfo.isButtonsNavigation()
 
     /**
      * return true if gesture navigation is being used (ie: line gesture, no-line gesture)
      * */
-    @JvmStatic
-    fun isGestureNavigation() = screenInfo.isGestureNavigation()
+    private fun _isGestureNavigation() = screenInfo.isGestureNavigation()
 
     /**
      * The safeArea is the area of the screen that is not obscured by the navigation bar, status bar, or other system UI elements.
      *
      * ie: topLeft, topRight, bottomRight, bottomLeft: [(0, 48), (1440, 48), (1440, 2340), (0, 2340)
      * */
-    @JvmStatic
-    val safeArea: ScreenArea
+    private val _safeArea: ScreenArea
         get() {
             val paddings = safeScreenPadding
 
@@ -149,8 +215,8 @@ object ScreenEz {
      * @return A `ScreenPadding` object, which is a tuple of four integers representing
      * the padding on the left, top, right, and bottom sides of the screen.
      */
-    @JvmStatic
-    val safeScreenPadding: ScreenPadding
+
+    private val _safeScreenPadding: ScreenPadding
         get() {
             val topPadding = safePaddingTop
             val bottomPadding = safePaddingBottom
@@ -172,8 +238,8 @@ object ScreenEz {
      *
      * @return Integer, the padding on the left side of the screen.
      */
-    @JvmStatic
-    val safePaddingLeft: Int
+
+    private val _safePaddingLeft: Int
         get() {
             return maxOf(
                 screenInfo.cutoutPadding().left,
@@ -189,8 +255,8 @@ object ScreenEz {
      *
      * @return Integer, the padding on the right side of the screen.
      */
-    @JvmStatic
-    val safePaddingRight: Int
+
+    private val _safePaddingRight: Int
         get() {
             return maxOf(
                 screenInfo.cutoutPadding().right,
@@ -206,8 +272,8 @@ object ScreenEz {
      *
      * @return Integer, the padding on the top side of the screen.
      */
-    @JvmStatic
-    val safePaddingTop: Int
+
+    private val _safePaddingTop: Int
         get() {
             return maxOf(
                 screenInfo.cutoutPadding().top,
@@ -223,8 +289,8 @@ object ScreenEz {
      *
      * @return Integer, the padding on the bottom side of the screen.
      */
-    @JvmStatic
-    val safePaddingBottom: Int
+
+    private val _safePaddingBottom: Int
         get() {
             return maxOf(
                 screenInfo.cutoutPadding().bottom,
@@ -239,8 +305,8 @@ object ScreenEz {
      *
      * Returns: Integer (pixel unit), the safe width of the screen.
      */
-    @JvmStatic
-    val safeWidth: Int
+
+    private val _safeWidth: Int
         get() {
             val total = safePaddingLeft + safePaddingRight
             return fullWidth - total
@@ -251,8 +317,8 @@ object ScreenEz {
      *
      * Returns: Integer (pixel unit), the safe height of the screen.
      */
-    @JvmStatic
-    val safeHeight: Int
+
+    private val _safeHeight: Int
         get() {
             val bottomGestureNavHeight = navBarPadding.height()
             val topStatusBarHeight = statusBarPadding.height()
@@ -267,27 +333,24 @@ object ScreenEz {
      *
      * Returns: Integer (pixel unit), the safe height of the screen.
      */
-    @JvmStatic
-    val safeSize get() = Size(safeWidth, safeHeight)
+
+    private val _safeSize get() = Size(safeWidth, safeHeight)
 
     /**
      * @return status bar height (pixel unit)
      * */
-    @JvmStatic
-    val statusBarHeight: Int get() = statusBarPadding.top
+    private val _statusBarHeight: Int get() = statusBarPadding.top
 
     /**
      * @return navigation bar height (both gesture and buttons in pixel unit)
      * */
-    @JvmStatic
-    val navBarHeight: Int get() = screenInfo.navBarHeight()
+    private val _navBarHeight: Int get() = screenInfo.navBarHeight()
 
 
     /**
      * @return true if screen is in portrait mode
      * */
-    @JvmStatic
-    fun isPortrait(): Boolean {
+    private fun _isPortrait(): Boolean {
         return screenInfo.orientation() == Configuration.ORIENTATION_PORTRAIT
     }
 
@@ -299,8 +362,7 @@ object ScreenEz {
      *
      * Returns: ScreenRotation
      */
-    @JvmStatic
-    fun screenRotation(): ScreenRotation {
+    private fun _screenRotation(): ScreenRotation {
         return screenInfo.screenRotation()
     }
 
